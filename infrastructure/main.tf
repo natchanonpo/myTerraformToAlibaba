@@ -23,8 +23,8 @@ locals {
   k8s_name         = "tf-poc-github-actions"
   new_vpc_name     = "vpc-for-${local.k8s_name}"
   log_project_name = "log-for-${local.k8s_name}"
-  db_instance_name = "poc-tw-test-db"
-  db_name          = "test-db"
+  db_instance_name = "tf-poc-github-actions"
+  db_name          = "test-db-github-actions"
 }
 
 data "alicloud_instance_types" "default" {
