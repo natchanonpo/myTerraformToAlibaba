@@ -63,25 +63,25 @@ output "certificate_authority" {
 //Output RDS resource
 output "instance_id" {
   description = "The RDS instance ID."
-  value = alicloud_db_instance.instance.id
+  value       = alicloud_db_instance.instance.id
 }
 
 output "rds_connection_port" {
   description = "RDS database connection port."
-  value = alicloud_db_instance.instance.port
+  value       = alicloud_db_instance.instance.port
 }
 
 output "rds_connection_string" {
   description = "RDS database connection string."
-  value = alicloud_db_instance.instance.connection_string
+  value       = alicloud_db_instance.instance.connection_string
 }
 
 output "rds_ssl_status" {
   description = "Status of the SSL feature. Yes: SSL is turned on; No: SSL is turned off."
-  value = alicloud_db_instance.instance.ssl_status
+  value       = alicloud_db_instance.instance.ssl_status
 }
 
 output "database_id" {
   description = "The current database resource ID. Composed of instance ID and database name with format <instance_id>:<name>."
-  value = alicloud_db_database.default.id
+  value       = alicloud_db_database.default.id
 }

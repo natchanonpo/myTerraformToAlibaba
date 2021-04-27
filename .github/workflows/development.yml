@@ -78,6 +78,7 @@ jobs:
       run: terraform init
 
     # Checks that all Terraform configuration files adhere to a canonical format
+    # This will not tell any errors why it failed, just run terraform fmt on your local machine before pushing code to the repository.
     - name: Terraform Format
       working-directory: ./infrastructure
       run: terraform fmt -check

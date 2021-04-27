@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     alicloud = {
-      source = "aliyun/alicloud"
+      source  = "aliyun/alicloud"
       version = "1.121.1"
     }
   }
@@ -20,11 +20,11 @@ provider "alicloud" {
 }
 
 locals {
-  k8s_name          = "tf-cluster-poc"
-  new_vpc_name      = "vpc-for-${local.k8s_name}"
-  log_project_name  = "log-for-${local.k8s_name}"
-  db_instance_name  = "poc-tw-test-db"
-  db_name           = "test-db"
+  k8s_name         = "tf-cluster-poc"
+  new_vpc_name     = "vpc-for-${local.k8s_name}"
+  log_project_name = "log-for-${local.k8s_name}"
+  db_instance_name = "poc-tw-test-db"
+  db_name          = "test-db"
 }
 
 data "alicloud_instance_types" "default" {
@@ -45,10 +45,10 @@ resource "alicloud_vpc" "default" {
 }
 
 resource "alicloud_vswitch" "vswitches" {
-  count             = 3
-  vpc_id            = alicloud_vpc.default[0].id
-  cidr_block        = element(["192.168.0.0/19", "192.168.64.0/19", "192.168.96.0/20"], count.index)
-  zone_id           = element(data.alicloud_zones.default.zones.*.id, count.index)
+  count      = 3
+  vpc_id     = alicloud_vpc.default[0].id
+  cidr_block = element(["192.168.0.0/19", "192.168.64.0/19", "192.168.96.0/20"], count.index)
+  zone_id    = element(data.alicloud_zones.default.zones.*.id, count.index)
 }
 
 //RDS
@@ -73,28 +73,28 @@ resource "alicloud_log_project" "log" {
 }
 
 resource "alicloud_cs_managed_kubernetes" "k8s" {
-  name                      = local.k8s_name
-  version                   = "1.18.8-aliyun.1"
-  cluster_spec              = "ack.pro.small"
-  rds_instances             = [alicloud_db_instance.instance.id]
-  worker_vswitch_ids        = split(",", join(",", alicloud_vswitch.vswitches.*.id))
-  new_nat_gateway           = true
-  worker_instance_types     = [data.alicloud_instance_types.default.instance_types[0].id]
-  worker_number             = 3
-  password                  = "Yourpassword1234"
-  pod_cidr                  = "172.20.0.0/16"
-  service_cidr              = "172.21.0.0/20"
-  install_cloud_monitor     = true
-  slb_internet_enabled      = true
-  worker_disk_category      = "cloud_efficiency"
+  name                  = local.k8s_name
+  version               = "1.18.8-aliyun.1"
+  cluster_spec          = "ack.pro.small"
+  rds_instances         = [alicloud_db_instance.instance.id]
+  worker_vswitch_ids    = split(",", join(",", alicloud_vswitch.vswitches.*.id))
+  new_nat_gateway       = true
+  worker_instance_types = [data.alicloud_instance_types.default.instance_types[0].id]
+  worker_number         = 3
+  password              = "Yourpassword1234"
+  pod_cidr              = "172.20.0.0/16"
+  service_cidr          = "172.21.0.0/20"
+  install_cloud_monitor = true
+  slb_internet_enabled  = true
+  worker_disk_category  = "cloud_efficiency"
 
   runtime = {
-    name = "docker"
+    name    = "docker"
     version = "19.03.5"
   }
 
   addons {
-    name     = "logtail-ds"
-    config   = "{\"IngressDashboardEnabled\":\"true\",\"sls_project_name\":alicloud_log_project.log.name}"
+    name   = "logtail-ds"
+    config = "{\"IngressDashboardEnabled\":\"true\",\"sls_project_name\":alicloud_log_project.log.name}"
   }
 }
