@@ -44,13 +44,21 @@
 
 name: 'Terraform'
 
-on: workflow_dispatch
+on: 
+  workflow_dispatch:
+    inputs:
+      alibabaCloudAccessKey:
+        description: 'Alibaba Cloud Access Key'
+        required: true
+      alibabaCloudSecretKey:
+        description: 'Alibaba Cloud Secret Key'
+        required: true
 
 jobs:
   terraform:
     name: 'Terraform'
     runs-on: ubuntu-latest
-    environment: production
+    environment: development
 
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
