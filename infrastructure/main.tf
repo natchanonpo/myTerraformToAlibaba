@@ -34,7 +34,8 @@ data "alicloud_instance_types" "default" {
 }
 
 data "alicloud_zones" "default" {
-  available_instance_type = data.alicloud_instance_types.default.instance_types[0].id
+  available_instance_type     = data.alicloud_instance_types.default.instance_types[0].id
+  available_resource_creation = "Rds"
 }
 
 //VPC
@@ -57,7 +58,7 @@ resource "alicloud_db_instance" "instance" {
   engine_version   = "8.0"
   instance_type    = "rds.mysql.s1.small"
   instance_storage = "10"
-  vswitch_id       = alicloud_vswitch.vswitches[2].id
+  vswitch_id       = alicloud_vswitch.vswitches[0].id
   instance_name    = local.db_instance_name
 }
 
