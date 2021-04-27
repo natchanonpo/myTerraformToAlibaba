@@ -44,7 +44,7 @@
 
 name: 'Terraform'
 
-on: workflow_dispatch:
+on: workflow_dispatch
 
 env:
   ALICLOUD_ACCESS_KEY: ${{ secrets.ALICLOUD_ACCESS_KEY }}
