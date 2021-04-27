@@ -5,11 +5,19 @@ terraform {
       version = "1.121.1"
     }
   }
+  backend "oss" {
+    bucket = "xom-bcs-terraform-test"
+    region = "cn-shanghai"
+    // The access key is provided from ALICLOUD_ACCESS_KEY environment variable
+    // The secret key is provided from ALICLOUD_SECRET_KEY environment variable
+  }
 }
 
 provider "alicloud" {
+  region = "cn-shanghai"
+  // The access key is provided from ALICLOUD_ACCESS_KEY environment variable
+  // The secret key is provided from ALICLOUD_SECRET_KEY environment variable
 }
-
 
 locals {
   k8s_name          = "tf-cluster-poc"
@@ -65,33 +73,19 @@ resource "alicloud_log_project" "log" {
 }
 
 resource "alicloud_cs_managed_kubernetes" "k8s" {
-
   name                      = local.k8s_name
-
   version                   = "1.18.8-aliyun.1"
-
   cluster_spec              = "ack.pro.small"
-
   rds_instances             = [alicloud_db_instance.instance.id]
-
   worker_vswitch_ids        = split(",", join(",", alicloud_vswitch.vswitches.*.id))
-
   new_nat_gateway           = true
-
   worker_instance_types     = [data.alicloud_instance_types.default.instance_types[0].id]
-
   worker_number             = 3
-
   password                  = "Yourpassword1234"
-
   pod_cidr                  = "172.20.0.0/16"
-
   service_cidr              = "172.21.0.0/20"
-
   install_cloud_monitor     = true
-
   slb_internet_enabled      = true
-
   worker_disk_category      = "cloud_efficiency"
 
   runtime = {
