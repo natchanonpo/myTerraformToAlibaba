@@ -20,7 +20,7 @@ provider "alicloud" {
 }
 
 locals {
-  k8s_name         = "tf-cluster-poc"
+  k8s_name         = "tf-poc-github-actions"
   new_vpc_name     = "vpc-for-${local.k8s_name}"
   log_project_name = "log-for-${local.k8s_name}"
   db_instance_name = "poc-tw-test-db"
