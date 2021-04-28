@@ -8,7 +8,7 @@ env:
 
 jobs:
   terraform:
-    name: 'Terraform'
+    name: 'Terraform Deploy'
     runs-on: ubuntu-latest
     environment: development
 
