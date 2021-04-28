@@ -1,0 +1,54 @@
+name: 'Terraform'
+
+on: workflow_dispatch
+
+env:
+  ALICLOUD_ACCESS_KEY: ${{ secrets.ALICLOUD_ACCESS_KEY }}
+  ALICLOUD_SECRET_KEY: ${{ secrets.ALICLOUD_SECRET_KEY }}
+
+jobs:
+  terraform:
+    name: 'Terraform'
+    runs-on: ubuntu-latest
+    environment: development
+
+    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+    # Checkout the repository to the GitHub Actions runner
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1
+      with:
+        terraform_version: 0.15.0
+
+    # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
+    - name: Terraform Init
+      working-directory: ./infrastructure
+      run: terraform init
+
+    # Checks that all Terraform configuration files adhere to a canonical format
+    # This will not tell any errors why it failed, just run terraform fmt on your local machine before pushing code to the repository.
+    - name: Terraform Format
+      working-directory: ./infrastructure
+      run: terraform fmt -check
+
+    # Generates an execution plan for Terraform
+    - name: Terraform Validate and Plan
+      working-directory: ./infrastructure
+      run: |-
+        terraform validate
+        terraform plan
+
+      # On push to main, build or change infrastructure according to Terraform configuration files
+      # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
+    - name: Terraform Apply
+      working-directory: ./infrastructure
+      #if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      run: terraform apply -auto-approve
