@@ -6,7 +6,7 @@ terraform {
     }
   }
   backend "oss" {
-    bucket = "xom-bcs-terraform-test"
+    bucket = "XOM-BCS-NONPROD-OSS-TFSTATE"
     region = "cn-shanghai"
     // The access key is provided from ALICLOUD_ACCESS_KEY environment variable
     // The secret key is provided from ALICLOUD_SECRET_KEY environment variable
@@ -17,15 +17,6 @@ provider "alicloud" {
   region = "cn-shanghai"
   // The access key is provided from ALICLOUD_ACCESS_KEY environment variable
   // The secret key is provided from ALICLOUD_SECRET_KEY environment variable
-}
-
-locals {
-  resource_group_id = "rg-aekzr7sprapjh4a"
-  k8s_name         = "tf-poc-github-actions"
-  new_vpc_name     = "vpc-for-${local.k8s_name}"
-  log_project_name = "log-for-${local.k8s_name}"
-  db_instance_name = "tf-poc-github-actions"
-  db_name          = "test-db-github-actions"
 }
 
 data "alicloud_zones" "ecs" {
