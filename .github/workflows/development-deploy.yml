@@ -5,6 +5,7 @@ on: workflow_dispatch
 env:
   ALICLOUD_ACCESS_KEY: ${{ secrets.ALICLOUD_ACCESS_KEY }}
   ALICLOUD_SECRET_KEY: ${{ secrets.ALICLOUD_SECRET_KEY }}
+  TF_REGISTRY_CLIENT_TIMEOUT: 120
 
 jobs:
   terraform:
