@@ -5,7 +5,6 @@ on: workflow_dispatch
 env:
   ALICLOUD_ACCESS_KEY: ${{ secrets.ALICLOUD_ACCESS_KEY }}
   ALICLOUD_SECRET_KEY: ${{ secrets.ALICLOUD_SECRET_KEY }}
-  TF_REGISTRY_CLIENT_TIMEOUT: 120
 
 jobs:
   terraform:
@@ -40,12 +39,15 @@ jobs:
       working-directory: ./infrastructure
       run: terraform fmt -check
 
+    # Validate Terraform
+    - name: Terraform Validate
+      working-directory: ./infrastructure
+      run: terraform validate
+
     # Generates an execution plan for Terraform
     - name: Terraform Validate and Plan
       working-directory: ./infrastructure
-      run: |-
-        terraform validate
-        terraform plan -destroy
+      run: terraform plan -destroy
 
       # On push to main, build or change infrastructure according to Terraform configuration files
       # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
