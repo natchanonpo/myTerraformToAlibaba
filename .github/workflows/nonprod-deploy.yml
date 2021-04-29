@@ -37,7 +37,6 @@ jobs:
     # Checks that all Terraform configuration files adhere to a canonical format
     # This will not tell any errors why it failed, just run terraform fmt -recursive on your local machine before pushing code to the repository.
     - name: Terraform Format
-      working-directory: ./infrastructure
       run: terraform fmt -recursive -check
 
     # Validate Terraform
@@ -46,7 +45,7 @@ jobs:
       run: terraform validate
 
     # Generates an execution plan for Terraform
-    - name: Terraform Validate and Plan
+    - name: Terraform Plan
       working-directory: ./infrastructure
       run: terraform plan -var-file=../environments/nonprod/infra-env.tfvars
 
