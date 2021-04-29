@@ -1,1 +1,2 @@
-environment = "PRODUCTION"
+environment         = "PRODUCTION"
+resource_group_name = ""

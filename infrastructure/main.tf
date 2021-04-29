@@ -29,9 +29,13 @@ data "alicloud_zones" "rds" {
   available_resource_creation = "Rds"
 }
 
+data "alicloud_resource_manager_resource_groups" "resource_group" {
+  name_regex = var.resource_group_name
+}
+
 //VPC
-resource "alicloud_vpc" "nonprod" {
-  resource_group_id = local.resource_group_id
+resource "alicloud_vpc" "vpc" {
+  resource_group_id = data.alicloud_resource_manager_resource_groups.resource_group.ids[0]
   count             = 1
   vpc_name          = "XOM-BCS-${var.environment}-VPC"
   cidr_block        = "192.168.0.0/16"
@@ -40,7 +44,7 @@ resource "alicloud_vpc" "nonprod" {
 
 resource "alicloud_vswitch" "ecs" {
   count        = 3
-  vpc_id       = alicloud_vpc.nonprod[0].id
+  vpc_id       = alicloud_vpc.vpc[0].id
   cidr_block   = element(["192.168.0.0/19", "192.168.64.0/19", "192.168.96.0/20"], count.index)
   vswitch_name = element(["XOM-BCS-${var.environment}-SNT1-node", "XOM-BCS-${var.environment}-SNT2-node", "XOM-BCS-${var.environment}-SNT3-node"], count.index)
   zone_id      = element(data.alicloud_zones.ecs.zones.*.id, count.index)
@@ -49,7 +53,7 @@ resource "alicloud_vswitch" "ecs" {
 
 resource "alicloud_vswitch" "rds" {
   count        = 1
-  vpc_id       = alicloud_vpc.nonprod[0].id
+  vpc_id       = alicloud_vpc.vpc[0].id
   cidr_block   = "192.168.112.0/21"
   vswitch_name = "XOM-BCS-${var.environment}-SNT4-database"
   zone_id      = data.alicloud_zones.rds.zones.0.id
@@ -57,8 +61,8 @@ resource "alicloud_vswitch" "rds" {
 }
 
 //RDS
-resource "alicloud_db_instance" "nonprod" {
-  resource_group_id = local.resource_group_id
+resource "alicloud_db_instance" "rds" {
+  resource_group_id = data.alicloud_resource_manager_resource_groups.resource_group.ids[0]
   engine            = "MySQL"
   engine_version    = "8.0"
   instance_type     = "rds.mysql.s2.large"
@@ -69,12 +73,12 @@ resource "alicloud_db_instance" "nonprod" {
 }
 
 resource "alicloud_db_database" "dev" {
-  instance_id = alicloud_db_instance.nonprod.id
+  instance_id = alicloud_db_instance.rds.id
   name        = "XOM-BCS-DEV-DATABASE-PROJECT_TEMPLATE"
 }
 
 resource "alicloud_db_database" "acc" {
-  instance_id = alicloud_db_instance.nonprod.id
+  instance_id = alicloud_db_instance.rds.id
   name        = "XOM-BCS-ACC-DATABASE-PROJECT_TEMPLATE"
 }
 
@@ -86,42 +90,25 @@ resource "alicloud_log_project" "log" {
 }
 
 resource "alicloud_cs_managed_kubernetes" "k8s" {
-
-  resource_group_id = local.resource_group_id
-
-  name = "XOM-BCS-${var.environment}-K8S"
-
-  version = "1.18.8-aliyun.1"
-
-  cluster_spec = "ack.pro.small"
-
-  rds_instances = [alicloud_db_instance.nonprod.id]
-
-  worker_vswitch_ids = split(",", join(",", alicloud_vswitch.vswitches.*.id))
-
-  new_nat_gateway = true
-
+  resource_group_id     = data.alicloud_resource_manager_resource_groups.resource_group.ids[0]
+  name                  = "XOM-BCS-${var.environment}-K8S"
+  version               = "1.18.8-aliyun.1"
+  cluster_spec          = "ack.pro.small"
+  rds_instances         = [alicloud_db_instance.rds.id]
+  worker_vswitch_ids    = split(",", join(",", alicloud_vswitch.vswitches.*.id))
+  new_nat_gateway       = true
   worker_instance_types = [data.alicloud_instance_types.default.instance_types[0].id]
-
-  worker_number = 3
-
-  password = "Yourpassword1234"
-
-  pod_cidr = "172.20.0.0/16"
-
-  service_cidr = "172.21.0.0/20"
-
+  worker_number         = 3
+  password              = "Yourpassword1234"
+  pod_cidr              = "172.20.0.0/16"
+  service_cidr          = "172.21.0.0/20"
   install_cloud_monitor = true
-
-  slb_internet_enabled = true
-
-  worker_disk_category = "cloud_efficiency"
-
+  slb_internet_enabled  = true
+  worker_disk_category  = "cloud_efficiency"
   runtime = {
     name    = "docker"
     version = "19.03.5"
   }
-
   addons {
     name   = "logtail-ds"
     config = "{\"IngressDashboardEnabled\":\"true\",\"sls_project_name\":alicloud_log_project.log.name}"
