@@ -13,8 +13,8 @@ provider "alicloud" {
   // The secret key is provided from ALICLOUD_SECRET_KEY environment variable
 }
 
-resource "alicloud_oss_bucket" "bucket-acl" {
-  bucket = "XOM-BCS-OSS-TFSTATE"
+resource "alicloud_oss_bucket" "tf-state" {
+  bucket = lower("XOM-BCS-OSS-TFSTATE")
   acl    = "private"
 
   versioning {

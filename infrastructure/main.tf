@@ -6,7 +6,7 @@ terraform {
     }
   }
   backend "oss" {
-    bucket = "XOM-BCS-OSS-TFSTATE"
+    bucket = lower("XOM-BCS-OSS-TFSTATE")
     prefix = "nonprod/tfstate"
     region = "cn-shanghai"
     // The access key, secret key and region are provided from environment variables
