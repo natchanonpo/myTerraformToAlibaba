@@ -14,7 +14,7 @@ provider "alicloud" {
 }
 
 resource "alicloud_oss_bucket" "infra-tf-state" {
-  bucket = "XOM-BCS-NONPROD-OSS-TFSTATE"
+  bucket = "XOM-BCS-OSS-TFSTATE"
   acl    = "private"
 
   versioning {
@@ -22,7 +22,6 @@ resource "alicloud_oss_bucket" "infra-tf-state" {
   }
 
   tags = {
-    environment = "non-prod"
     application = "infrastructure"
   }
 }
