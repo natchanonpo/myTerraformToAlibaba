@@ -1,16 +1,17 @@
-name: 'Terraform Destroy'
+name: 'Terraform Non-Prod Destroy'
 
 on: workflow_dispatch
 
 env:
   ALICLOUD_ACCESS_KEY: ${{ secrets.ALICLOUD_ACCESS_KEY }}
   ALICLOUD_SECRET_KEY: ${{ secrets.ALICLOUD_SECRET_KEY }}
+  ALICLOUD_REGION: cn-shanghai
 
 jobs:
   terraform:
     name: 'Terraform Destroy'
     runs-on: ubuntu-latest
-    environment: development
+    environment: nonprod
 
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
@@ -31,27 +32,27 @@ jobs:
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
       working-directory: ./infrastructure
-      run: terraform init
+      run: terraform init -var-file=../environments/nonprod/infra-env.tfvars -backend-config=../environments/nonprod/infra-backend.tfvars
 
     # Checks that all Terraform configuration files adhere to a canonical format
-    # This will not tell any errors why it failed, just run terraform fmt on your local machine before pushing code to the repository.
+    # This will not tell any errors why it failed, just run terraform fmt -recursive on your local machine before pushing code to the repository.
     - name: Terraform Format
       working-directory: ./infrastructure
-      run: terraform fmt -check
+      run: terraform fmt -recursive -check
 
     # Validate Terraform
     - name: Terraform Validate
       working-directory: ./infrastructure
-      run: terraform validate
+      run: terraform validate -var-file=../environments/nonprod/infra-env.tfvars
 
     # Generates an execution plan for Terraform
     - name: Terraform Validate and Plan
       working-directory: ./infrastructure
-      run: terraform plan -destroy
+      run: terraform plan -destroy -var-file=../environments/nonprod/infra-env.tfvars
 
       # On push to main, build or change infrastructure according to Terraform configuration files
       # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
     - name: Terraform Destroy
       working-directory: ./infrastructure
       #if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-      run: terraform destroy -auto-approve
+      run: terraform destroy -auto-approve -var-file=../environments/nonprod/infra-env.tfvars
