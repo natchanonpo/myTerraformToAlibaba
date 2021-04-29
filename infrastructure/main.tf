@@ -105,7 +105,6 @@ resource "alicloud_cs_managed_kubernetes" "k8s" {
   install_cloud_monitor     = true
   is_enterprise_security_group = true
   load_balancer             = "slb.s2.small"
-  worker_disk_category      = "cloud_essd"
   runtime = {
     name    = "docker"
     version = "19.03.5"
