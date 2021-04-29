@@ -86,11 +86,11 @@ resource "alicloud_log_project" "log" {
 }
 
 resource "alicloud_cs_managed_kubernetes" "k8s" {
-  name                         = "XOM-BCS-NONPROD-K8S"
+  name                         = "XOM-BCS-${var.environment}-K8S"
   resource_group_id            = var.resource_group_id
   version                      = "1.18.8-aliyun.1"
   cluster_spec                 = "ack.pro.small"
-  rds_instances                = [alicloud_db_instance.nonprod.id]
+  rds_instances                = [alicloud_db_instance.rds_instance.id]
   worker_vswitch_ids           = split(",", join(",", alicloud_vswitch.ecs_vswitchs.*.id))
   new_nat_gateway              = true
   worker_instance_types        = ["ecs.g6.xlarge"]
@@ -98,7 +98,7 @@ resource "alicloud_cs_managed_kubernetes" "k8s" {
   worker_disk_category         = "cloud_essd"
   worker_disk_size             = "120"
   image_id                     = "centos_7_9_x64_20G_alibase_20201228.vhd"
-  key_name                     = "XOM-BCS-NONPROD-K8S-WORKER-KEY"
+  key_name                     = "XOM-BCS-${var.environment}-K8S-WORKER-KEY"
   pod_cidr                     = "172.20.0.0/16"
   service_cidr                 = "172.21.0.0/20"
   install_cloud_monitor        = true
