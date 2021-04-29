@@ -1,1 +1,1 @@
-bucket = "XOM-BCS-NONPROD-OSS-TFSTATE"
+bucket = "xom-bcs-nonprod-oss-tfstate"
