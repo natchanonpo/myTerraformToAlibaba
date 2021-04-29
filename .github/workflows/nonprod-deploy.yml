@@ -43,7 +43,7 @@ jobs:
     # Validate Terraform
     - name: Terraform Validate
       working-directory: ./infrastructure
-      run: terraform validate -var-file=../environments/nonprod/infra-env.tfvars
+      run: terraform validate
 
     # Generates an execution plan for Terraform
     - name: Terraform Validate and Plan
