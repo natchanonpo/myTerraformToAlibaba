@@ -1,1 +1,1 @@
-environment         = "NONPROD"
+environment = "NONPROD"

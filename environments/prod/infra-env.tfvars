@@ -1,1 +1,1 @@
-environment         = "PRODUCTION"
+environment = "PRODUCTION"
