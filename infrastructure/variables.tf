@@ -1,9 +1,9 @@
 variable "environment" {
-  type = string
+  type    = string
   default = "NONPROD"
 }
 
 variable "resource_group_id" {
-  type = string
+  type    = string
   default = "rg-aekzr7sprapjh4a"
 }

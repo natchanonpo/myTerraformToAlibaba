@@ -38,7 +38,7 @@ resource "alicloud_vpc" "vpc" {
   tags              = local.tags
 }
 
-resource "alicloud_vswitch" "ecs_vswitch" {
+resource "alicloud_vswitch" "ecs_vswitchs" {
   count        = 3
   vpc_id       = alicloud_vpc.vpc[0].id
   cidr_block   = element(["192.168.0.0/19", "192.168.64.0/19", "192.168.96.0/20"], count.index)
@@ -86,35 +86,34 @@ resource "alicloud_log_project" "log" {
 }
 
 resource "alicloud_cs_managed_kubernetes" "k8s" {
-
-  name                      = "XOM-BCS-NONPROD-K8S"
-  resource_group_id         = var.resource_group_id
-  version                   = "1.18.8-aliyun.1"
-  cluster_spec              = "ack.pro.small"
-  rds_instances             = [alicloud_db_instance.nonprod.id]
-  worker_vswitch_ids        = split(",", join(",", alicloud_vswitch.vswitches.*.id))
-  new_nat_gateway           = true
-  worker_instance_types     = ["ecs.g6.xlarge"]
-  worker_number             = 3
-  worker_disk_category      = "cloud_essd"
-  worker_disk_size          = "120"
-  image_id                  =  "centos_7_9_x64_20G_alibase_20201228.vhd"
-  key_name                  = "XOM-BCS-NONPROD-K8S-WORKER-KEY"
-  pod_cidr                  = "172.20.0.0/16"
-  service_cidr              = "172.21.0.0/20"
-  install_cloud_monitor     = true
+  name                         = "XOM-BCS-NONPROD-K8S"
+  resource_group_id            = var.resource_group_id
+  version                      = "1.18.8-aliyun.1"
+  cluster_spec                 = "ack.pro.small"
+  rds_instances                = [alicloud_db_instance.nonprod.id]
+  worker_vswitch_ids           = split(",", join(",", alicloud_vswitch.ecs_vswitchs.*.id))
+  new_nat_gateway              = true
+  worker_instance_types        = ["ecs.g6.xlarge"]
+  worker_number                = 3
+  worker_disk_category         = "cloud_essd"
+  worker_disk_size             = "120"
+  image_id                     = "centos_7_9_x64_20G_alibase_20201228.vhd"
+  key_name                     = "XOM-BCS-NONPROD-K8S-WORKER-KEY"
+  pod_cidr                     = "172.20.0.0/16"
+  service_cidr                 = "172.21.0.0/20"
+  install_cloud_monitor        = true
   is_enterprise_security_group = true
-  load_balancer             = "slb.s2.small"
+  load_balancer                = "slb.s2.small"
   runtime = {
     name    = "docker"
     version = "19.03.5"
   }
   dynamic "addons" {
-      for_each = var.cluster_addons
-      content {
-        name                    = lookup(addons.value, "name", var.cluster_addons)
-        config                  = lookup(addons.value, "config", var.cluster_addons)
-      }
+    for_each = var.cluster_addons
+    content {
+      name   = lookup(addons.value, "name", var.cluster_addons)
+      config = lookup(addons.value, "config", var.cluster_addons)
+    }
   }
   tags = local.tags
 }
