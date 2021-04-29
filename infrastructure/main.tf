@@ -103,7 +103,7 @@ resource "alicloud_cs_managed_kubernetes" "k8s" {
   service_cidr                 = "172.21.0.0/20"
   install_cloud_monitor        = true
   is_enterprise_security_group = true
-  load_balancer                = "slb.s2.small"
+  load_balancer_spec           = "slb.s2.small"
   runtime = {
     name    = "docker"
     version = "19.03.5"
