@@ -67,7 +67,7 @@ resource "alicloud_db_instance" "rds_instance" {
   engine_version    = "8.0"
   instance_type     = "rds.mysql.s2.large"
   instance_storage  = "50"
-  vswitch_id        = rds_vswitch.rds_vswitch[0].id
+  vswitch_id        = alicloud_vswitch.rds_vswitch[0].id
   instance_name     = "XOM-BCS-${var.environment}-RDS"
   tags              = local.tags
 }
