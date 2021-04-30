@@ -24,14 +24,6 @@ locals {
   }
 }
 
-data "alicloud_zones" "ecs_zones" {
-  available_instance_type = "ecs.g6.xlarge"
-}
-
-data "alicloud_zones" "rds_zones" {
-  available_resource_creation = "Rds"
-}
-
 //VPC
 resource "alicloud_vpc" "vpc" {
   resource_group_id = var.resource_group_id
@@ -46,7 +38,7 @@ resource "alicloud_vswitch" "ecs_vswitchs" {
   vpc_id       = alicloud_vpc.vpc[0].id
   cidr_block   = element(["192.168.0.0/19", "192.168.64.0/19", "192.168.96.0/20"], count.index)
   vswitch_name = element(["XOM-BCS-${var.environment}-SNT1-node", "XOM-BCS-${var.environment}-SNT2-node", "XOM-BCS-${var.environment}-SNT3-node"], count.index)
-  zone_id      = element(data.alicloud_zones.ecs_zones.zones.*.id, count.index)
+  zone_id      = element(["cn-shanghai-b", "cn-shanghai-g", "cn-shanghai-l"], count.index)
   tags         = local.tags
 }
 
@@ -55,7 +47,7 @@ resource "alicloud_vswitch" "rds_vswitch" {
   vpc_id       = alicloud_vpc.vpc[0].id
   cidr_block   = "192.168.112.0/21"
   vswitch_name = "XOM-BCS-${var.environment}-SNT4-database"
-  zone_id      = data.alicloud_zones.rds_zones.zones.0.id
+  zone_id      = "cn-shanghai-a"
   tags         = local.tags
 }
 
