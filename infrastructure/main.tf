@@ -51,6 +51,12 @@ resource "alicloud_vswitch" "rds_vswitch" {
   tags         = local.tags
 }
 
+resource "alicloud_vswitch" "kafka_vswitch" {
+  vpc_id     = alicloud_vpc.vpc[0].id
+  cidr_block = "192.168.151.0/24"
+  zone_id    = "cn-shanghai-a"
+}
+
 //RDS
 resource "alicloud_db_instance" "rds_instance" {
   resource_group_id = var.resource_group_id
@@ -71,6 +77,17 @@ resource "alicloud_db_database" "dev" {
 resource "alicloud_db_database" "acc" {
   instance_id = alicloud_db_instance.rds_instance.id
   name        = lower("XOM-BCS-ACC-DATABASE-PROJECT_TEMPLATE")
+}
+
+//MQ
+resource "alicloud_alikafka_instance" "kafka_instance" {
+  name        = "XOM-BCS-${var.environment}-MQ"
+  topic_quota = "50"
+  disk_type   = "1"
+  disk_size   = "500"
+  deploy_type = "4"
+  io_max      = "20"
+  vswitch_id  = alicloud_vswitch.kafka_vswitch.id
 }
 
 //ACK
