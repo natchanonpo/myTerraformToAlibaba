@@ -120,3 +120,30 @@ resource "alicloud_cs_managed_kubernetes" "k8s" {
   }
   tags = local.tags
 }
+
+
+//grant cluster read-only permission for alibaba console role
+resource "alicloud_ram_policy" "cluster-read-only" {
+  policy_name     = "cluster-read-only"
+  policy_document = <<EOF
+  {
+    "Statement": [{
+      "Action": [
+         "cs:Get*"
+         ],
+      "Effect": "Allow",
+      "Resource": [
+         "acs:cs:*:*:cluster/${alicloud_cs_managed_kubernetes.k8s.id}"
+      ]
+    }],
+    "Version": "1"
+  }
+  EOF
+  description     = "read only policy for K8S"
+}
+
+resource "alicloud_ram_role_policy_attachment" "attach" {
+  policy_name = alicloud_ram_policy.cluster-read-only.name
+  policy_type = alicloud_ram_policy.cluster-read-only.type
+  role_name   = "flcit-chemicalchina-dev-xom-editor"
+}
