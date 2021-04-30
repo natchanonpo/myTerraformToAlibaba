@@ -87,12 +87,13 @@ resource "alicloud_alikafka_instance" "kafka_instance" {
   disk_size   = "500"
   deploy_type = "4"
   io_max      = "20"
+  eip_max     = "1" //don't know what is it, but document said that it can only be increased. So I put lowest number first.
   vswitch_id  = alicloud_vswitch.kafka_vswitch.id
 }
 
 //ACK
 resource "alicloud_log_project" "log" {
-  name        = "XOM-BCS-${var.environment}-SLS"
+  name        = lower("XOM-BCS-${var.environment}-SLS")
   description = "log for k8s"
   tags        = local.tags
 }
