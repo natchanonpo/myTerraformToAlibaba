@@ -1,7 +1,7 @@
 resource "alicloud_log_project" "log" {
   name        = lower(var.log_name)
   description = "log for k8s"
-  tags        = local.tags
+  tags        = var.tags
 }
 
 locals {

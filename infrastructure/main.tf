@@ -22,10 +22,11 @@ locals {
 }
 
 module "vpc" {
-  source = "../modules/vpc"
-  name   = "XOM-${var.project_name}-${var.environment}-VPC"
-  cidr   = var.vpc_cidr
-  tags   = local.tags
+  source            = "../modules/vpc"
+  name              = "XOM-${var.project_name}-${var.environment}-VPC"
+  resource_group_id = var.resource_group_id
+  cidr              = var.vpc_cidr
+  tags              = local.tags
 }
 
 module "vswitchs" {
