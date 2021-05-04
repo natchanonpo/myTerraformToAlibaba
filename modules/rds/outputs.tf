@@ -15,5 +15,5 @@ output "instance_ssl_status" {
 }
 
 output "database_ids" {
-  value = alicloud_db_instance.*.id
+  value = alicloud_db_database.database.*.id
 }

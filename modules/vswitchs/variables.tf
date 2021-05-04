@@ -35,13 +35,13 @@ variable "kafka_names_suffix" {
 }
 
 variable "ecs_zone_ids" {
-  type = string
+  type = list(string)
 }
 
 variable "rds_zone_ids" {
-  type = string
+  type = list(string)
 }
 
 variable "kafka_zone_ids" {
-  type = string
+  type = list(string)
 }

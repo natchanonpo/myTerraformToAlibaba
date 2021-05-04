@@ -41,5 +41,5 @@ resource "alicloud_cs_managed_kubernetes" "k8s" {
       config = lookup(addons.value, "config", local.full_cluster_addons)
     }
   }
-  tags = local.tags
+  tags = var.tags
 }

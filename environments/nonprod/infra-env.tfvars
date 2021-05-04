@@ -1,6 +1,7 @@
 // Shared
-environment  = "NONPROD"
-project_name = "ECOMM-BCS"
+environment       = "NONPROD"
+project_name      = "ECOMM-BCS"
+resource_group_id = "rg-aekzr7sprapjh4a"
 
 // VSwitch
 ecs_vswitch_cidrs      = ["192.168.0.0/19", "192.168.64.0/19", "192.168.96.0/20"]
@@ -24,12 +25,12 @@ kafka_io_max      = 20
 kafka_eip_max     = 1
 
 // ACK
-k8s_cluster_spec          = "ack.pro.small"
-k8s_worker_instance_types = "ecs.g6.xlarge"
-k8s_load_balancer_spec    = "slb.s2.small"
-k8s_pod_cidr              = "172.20.0.0/16"
-k8s_service_cidr          = "172.21.0.0/20"
-k8s_worker_disk_size      = 120
+k8s_cluster_spec         = "ack.pro.small"
+k8s_worker_instance_type = "ecs.g6.xlarge"
+k8s_load_balancer_spec   = "slb.s2.small"
+k8s_pod_cidr             = "172.20.0.0/16"
+k8s_service_cidr         = "172.21.0.0/20"
+k8s_worker_disk_size     = 120
 k8s_cluster_addons = [
   {
     "name"   = "nginx-ingress-controller",

@@ -30,10 +30,10 @@ module "vpc" {
 
 module "vswitchs" {
   source             = "../modules/vswitchs"
-  vpc_id             = vpc.vpc_id
+  vpc_id             = module.vpc.vpc_id
   ecs_cidrs          = var.ecs_vswitch_cidrs
-  rds_cidrs          = var.rds_vswitch_cidr
-  kafka_cidrs        = var.kafka_vswitch_cidr
+  rds_cidrs          = var.rds_vswitch_cidrs
+  kafka_cidrs        = var.kafka_vswitch_cidrs
   ecs_zone_ids       = var.ecs_vswitch_zone_ids
   rds_zone_ids       = var.rds_vswitch_zone_ids
   kafka_zone_ids     = var.kafka_vswitch_zone_ids
@@ -45,15 +45,16 @@ module "vswitchs" {
 }
 
 module "rds" {
-  source           = "../modules/rds"
-  instance_name    = "XOM-${var.project_name}-${var.environment}-RDS"
-  instance_type    = var.rds_instance_type
-  instance_storage = var.rds_instance_storage
-  vswitch_id       = module.vswitchs.rds_vswitch_ids[0].id
-  db_name_template = "XOM-${var.project_name}-%s-DATABASE-%s"
-  db_names         = var.db_names
-  db_envs          = var.db_envs
-  tags             = local.tags
+  source            = "../modules/rds"
+  resource_group_id = var.resource_group_id
+  instance_name     = "XOM-${var.project_name}-${var.environment}-RDS"
+  instance_type     = var.rds_instance_type
+  instance_storage  = var.rds_instance_storage
+  vswitch_id        = module.vswitchs.rds_vswitch_ids[0].id
+  db_name_template  = "XOM-${var.project_name}-%s-DATABASE-%s"
+  db_names          = var.db_names
+  db_envs           = var.db_envs
+  tags              = local.tags
 }
 
 module "kafka" {

@@ -22,52 +22,52 @@ output "kafka_vswitch_ids" {
 // Output kubernetes resource
 output "cluster_id" {
   description = "ID of the kunernetes cluster."
-  value       = module.k8s.cluster_id
+  value       = module.ack.cluster_id
 }
 
 output "cluster_name" {
   description = "Name of the kunernetes cluster."
-  value       = module.k8s.cluster_name
+  value       = module.ack.cluster_name
 }
 
 output "master_slb_intranet" {
   description = "The ID of private load balancer where the current cluster master node is located."
-  value       = module.k8s.master_slb_intranet
+  value       = module.ack.master_slb_intranet
 }
 
 output "security_group_id" {
   description = "The ID of security group where the current cluster worker node is located."
-  value       = module.k8s.security_group_id
+  value       = module.ack.security_group_id
 }
 
 output "nat_gateway_id" {
   description = "The ID of nat gateway used to launch kubernetes cluster."
-  value       = module.k8s.nat_gateway_id
+  value       = module.ack.nat_gateway_id
 }
 
 output "worker_nodes" {
   description = "List worker nodes of cluster."
-  value       = [module.k8s.worker_nodes]
+  value       = [module.ack.worker_nodes]
 }
 
 output "connection_info" {
   description = "Map of kubernetes cluster connection information."
-  value       = [module.k8s.connection_info]
+  value       = [module.ack.connection_info]
 }
 
 output "version" {
   description = "The Kubernetes server version for the cluster."
-  value       = module.k8s.version
+  value       = module.ack.version
 }
 
 output "worker_ram_role_name" {
   description = "The RamRole Name attached to worker node."
-  value       = module.k8s.worker_ram_role_name
+  value       = module.ack.worker_ram_role_name
 }
 
 output "certificate_authority" {
   description = "Nested attribute containing certificate authority data for your cluster."
-  value       = module.k8s.certificate_authority
+  value       = module.ack.certificate_authority
 }
 
 //Output RDS resource

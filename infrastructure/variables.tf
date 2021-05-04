@@ -7,8 +7,7 @@ variable "project_name" {
 }
 
 variable "resource_group_id" {
-  type    = string
-  default = "rg-aekzr7sprapjh4a"
+  type = string
 }
 
 variable "vpc_cidr" {
@@ -75,11 +74,23 @@ variable "k8s_cluster_spec" {
   type = string
 }
 
-variable "k8s_worker_instance_types" {
+variable "k8s_worker_instance_type" {
   type = string
 }
 
 variable "k8s_worker_disk_size" {
+  type = string
+}
+
+variable "k8s_load_balancer_spec" {
+  type = string
+}
+
+variable "k8s_pod_cidr" {
+  type = string
+}
+
+variable "k8s_service_cidr" {
   type = string
 }
 
