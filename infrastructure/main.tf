@@ -74,6 +74,7 @@ module "ack" {
   log_name             = "XOM-${var.project_name}-${var.environment}-SLS"
   k8s_name             = "XOM-${var.project_name}-${var.environment}-K8S"
   k8s_key_name         = "XOM-${var.project_name}-${var.environment}-K8S-WORKER-KEY"
+  resource_group_id    = var.resource_group_id
   cluster_spec         = var.k8s_cluster_spec
   ecs_vswitch_ids      = module.vswitchs.ecs_vswitch_ids
   rds_instance_id      = module.rds.instance_id
