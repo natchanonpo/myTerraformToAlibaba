@@ -79,6 +79,8 @@ module "ack" {
   load_balancer_spec   = var.k8s_load_balancer_spec
   worker_disk_size     = var.k8s_worker_disk_size
   cluster_addons       = var.k8s_cluster_addons
+  pod_cidr             = var.k8s_pod_cidr
+  service_cidr         = var.k8s_service_cidr
   tags                 = local.tags
 }
 
