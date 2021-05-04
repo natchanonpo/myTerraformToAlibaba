@@ -9,3 +9,7 @@ variable "name" {
 variable "cidr" {
   type = string
 }
+
+variable "resource_group_id" {
+  type = string
+}
