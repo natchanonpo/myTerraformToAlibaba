@@ -22,14 +22,14 @@ locals {
 }
 
 module "vpc" {
-  source = "../moduels/vpc"
+  source = "../modules/vpc"
   name   = "XOM-${var.project_name}-${var.environment}-VPC"
   cidr   = var.vpc_cidr
   tags   = local.tags
 }
 
 module "vswitchs" {
-  source             = "../moduels/vswitchs"
+  source             = "../modules/vswitchs"
   vpc_id             = vpc.vpc_id
   ecs_cidrs          = var.ecs_vswitch_cidrs
   rds_cidrs          = var.rds_vswitch_cidr
@@ -45,7 +45,7 @@ module "vswitchs" {
 }
 
 module "rds" {
-  source           = "../moduels/rds"
+  source           = "../modules/rds"
   instance_name    = "XOM-${var.project_name}-${var.environment}-RDS"
   instance_type    = var.rds_instance_type
   instance_storage = var.rds_instance_storage
@@ -57,7 +57,7 @@ module "rds" {
 }
 
 module "kafka" {
-  source      = "../moduels/kafka"
+  source      = "../modules/kafka"
   name        = "XOM-${var.project_name}-${var.environment}-MQ"
   topic_quota = var.kafka_topic_quota
   disk_size   = var.kafka_disk_size
@@ -68,7 +68,7 @@ module "kafka" {
 }
 
 module "ack" {
-  source               = "../moduels/ack"
+  source               = "../modules/ack"
   log_name             = "XOM-${var.project_name}-${var.environment}-SLS"
   k8s_name             = "XOM-${var.project_name}-${var.environment}-K8S"
   k8s_key_name         = "XOM-${var.project_name}-${var.environment}-K8S-WORKER-KEY"
@@ -81,10 +81,6 @@ module "ack" {
   cluster_addons       = var.k8s_cluster_addons
   tags                 = local.tags
 }
-
-//In general for a production database, you’ll choose either High Availability or Enterprise, usually with ‘Local Disk”.
-
-//ACK
 
 //grant cluster read-only permission for alibaba console role
 /*resource "alicloud_ram_policy" "cluster-read-only" {

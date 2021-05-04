@@ -11,6 +11,7 @@ rds_vswitch_zone_ids   = ["cn-shanghai-a"]
 kafka_vswitch_zone_ids = ["cn-shanghai-a"]
 
 // RDS
+//In general for a production database, you’ll choose either High Availability or Enterprise, usually with ‘Local Disk”.
 rds_instance_type    = "rds.mysql.s2.large"
 rds_instance_storage = "50"
 db_names             = ["ORDER-TO-CASH", "USER", "CUSTOMER-SERVICE", "CRM", "PRODUCT"]
