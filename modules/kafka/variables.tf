@@ -2,6 +2,10 @@ variable "tags" {
   type = map(any)
 }
 
+variable "name" {
+  type = string
+}
+
 variable "topic_quota" {
   type = number
 }
