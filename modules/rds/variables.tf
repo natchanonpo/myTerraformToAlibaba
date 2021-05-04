@@ -14,6 +14,10 @@ variable "instance_storage" {
   type = string
 }
 
+variable "vswitch_id" {
+  type = string
+}
+
 variable "db_names" {
   type = list(string)
 }
