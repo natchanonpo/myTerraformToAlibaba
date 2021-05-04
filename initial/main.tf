@@ -8,13 +8,11 @@ terraform {
 }
 
 provider "alicloud" {
-  region = "cn-shanghai"
-  // The access key is provided from ALICLOUD_ACCESS_KEY environment variable
-  // The secret key is provided from ALICLOUD_SECRET_KEY environment variable
+  // The access key, secret key and region are provided from environment variables
 }
 
 resource "alicloud_oss_bucket" "tf-state" {
-  bucket = lower("XOM-BCS-OSS-TFSTATE")
+  bucket = lower("XOM-BCS-SHARED-OSS-TFSTATE")
   acl    = "private"
 
   versioning {

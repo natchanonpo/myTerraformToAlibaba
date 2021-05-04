@@ -1,2 +1,2 @@
-bucket = "xom-bcs-production-oss-tfstate"
+bucket = "xom-bcs-shared-oss-tfstate"
 prefix = "production/tfstate"

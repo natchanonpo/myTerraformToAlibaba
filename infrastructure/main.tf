@@ -6,9 +6,6 @@ terraform {
     }
   }
   backend "oss" {
-    bucket = "xom-bcs-nonprod-oss-tfstate"
-    prefix = "nonprod/tfstate"
-    region = "cn-shanghai"
     // The access key, secret key and region are provided from environment variables
   }
 }
@@ -68,6 +65,9 @@ resource "alicloud_db_instance" "rds_instance" {
   instance_name     = "XOM-BCS-${var.environment}-RDS"
   tags              = local.tags
 }
+
+//In general for a production database, you’ll choose either High Availability or Enterprise, usually with ‘Local Disk”.
+
 
 resource "alicloud_db_database" "dev" {
   instance_id = alicloud_db_instance.rds_instance.id
@@ -133,7 +133,7 @@ resource "alicloud_cs_managed_kubernetes" "k8s" {
 
 
 //grant cluster read-only permission for alibaba console role
-resource "alicloud_ram_policy" "cluster-read-only" {
+/*resource "alicloud_ram_policy" "cluster-read-only" {
   policy_name     = "cluster-read-only"
   policy_document = <<EOF
   {
@@ -157,3 +157,4 @@ resource "alicloud_ram_role_policy_attachment" "attach" {
   policy_type = alicloud_ram_policy.cluster-read-only.type
   role_name   = "flcit-chemicalchina-dev-xom-editor"
 }
+*/
