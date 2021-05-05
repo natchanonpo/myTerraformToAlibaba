@@ -5,10 +5,10 @@ resource "alicloud_log_project" "log" {
 }
 
 locals {
-  full_cluster_addons = concat(var.cluster_addons, {
+  full_cluster_addons = concat(var.cluster_addons, [{
     "name"   = "logtail-ds",
     "config" = "{\"IngressDashboardEnabled\":\"true\",\"sls_project_name\":\"${alicloud_log_project.log.name}\"}"
-  })
+  }])
 }
 
 resource "alicloud_cs_managed_kubernetes" "k8s" {

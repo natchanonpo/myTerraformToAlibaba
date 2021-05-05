@@ -51,7 +51,7 @@ module "rds" {
   instance_name     = "XOM-${var.project_name}-${var.environment}-RDS"
   instance_type     = var.rds_instance_type
   instance_storage  = var.rds_instance_storage
-  vswitch_id        = module.vswitchs.rds_vswitch_ids[0].id
+  vswitch_id        = module.vswitchs.rds_vswitch_ids[0]
   db_name_template  = "XOM-${var.project_name}-%s-DATABASE-%s"
   db_names          = var.db_names
   db_envs           = var.db_envs
@@ -65,7 +65,7 @@ module "kafka" {
   disk_size   = var.kafka_disk_size
   io_max      = var.kafka_io_max
   eip_max     = var.kafka_eip_max
-  vswitch_id  = module.vswitchs.kafka_vswitch_ids[0].id
+  vswitch_id  = module.vswitchs.kafka_vswitch_ids[0]
   tags        = local.tags
 }
 
