@@ -60,4 +60,4 @@ jobs:
     - name: Terraform Apply
       working-directory: ./infrastructure
       if: github.event.inputs.checkingOnly == 'no'
-      run: terraform apply tfplan -auto-approve -input=false -var-file=../environments/nonprod/infra-env.tfvars
+      run: terraform apply -auto-approve -input=false tfplan
