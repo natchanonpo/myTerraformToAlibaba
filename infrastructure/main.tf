@@ -17,7 +17,7 @@ provider "alicloud" {
 locals {
   tags = {
     Environment = var.environment
-    Application = "BCS"
+    Application = "ECOMM-BCS"
   }
 }
 

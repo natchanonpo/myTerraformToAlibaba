@@ -35,7 +35,7 @@ resource "alicloud_cs_managed_kubernetes" "k8s" {
     version = "19.03.5"
   }
   dynamic "addons" {
-    for_each = var.cluster_addons
+    for_each = var.full_cluster_addons
     content {
       name   = lookup(addons.value, "name", local.full_cluster_addons)
       config = lookup(addons.value, "config", local.full_cluster_addons)
