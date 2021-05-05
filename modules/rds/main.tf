@@ -1,5 +1,5 @@
 locals {
-  db_full_names = flattern([
+  db_full_names = flatten([
     for env in var.db_envs : [
       for db_name in var.db_names :
       format(var.db_name_template, env, db_name)
