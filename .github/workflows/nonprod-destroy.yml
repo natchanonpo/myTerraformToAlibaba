@@ -54,4 +54,4 @@ jobs:
     - name: Terraform Destroy
       working-directory: ./infrastructure
       #if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-      run: terraform destroy tfplan -auto-approve -input=false -var-file=../environments/nonprod/infra-env.tfvars
+      run: terraform destroy -auto-approve -input=false tfplan
