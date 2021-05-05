@@ -43,7 +43,7 @@ variable "rds_instance_type" {
 }
 
 variable "rds_instance_storage" {
-  type = string
+  type = number
 }
 
 variable "db_names" {

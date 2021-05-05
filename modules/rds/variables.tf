@@ -15,7 +15,7 @@ variable "instance_type" {
 }
 
 variable "instance_storage" {
-  type = string
+  type = number
 }
 
 variable "vswitch_id" {

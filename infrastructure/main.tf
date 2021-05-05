@@ -38,7 +38,7 @@ module "vswitchs" {
   ecs_zone_ids       = var.ecs_vswitch_zone_ids
   rds_zone_ids       = var.rds_vswitch_zone_ids
   kafka_zone_ids     = var.kafka_vswitch_zone_ids
-  names_prefix       = "XOM-${var.project_name}-${var.environment}"
+  names_prefix       = "XOM-${var.project_name}-${var.environment}-SNT"
   ecs_names_suffix   = "node"
   rds_names_suffix   = "database"
   kafka_names_suffix = "kafka"
