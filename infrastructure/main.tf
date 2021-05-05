@@ -53,7 +53,7 @@ module "rds" {
   instance_type     = var.rds_instance_type
   instance_storage  = var.rds_instance_storage
   vswitch_id        = module.vswitchs.rds_vswitch_ids[0]
-  db_name_template  = "XOM-${var.project_name}-%s-DATABASE%d-%s"
+  db_name_template  = "XOM-${var.project_name}-%s-DATABASE%03s-%s"
   db_names          = var.db_names
   db_envs           = var.db_envs
   tags              = local.tags
