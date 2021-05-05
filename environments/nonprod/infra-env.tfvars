@@ -3,6 +3,9 @@ environment       = "NONPROD"
 project_name      = "ECOMM-BCS"
 resource_group_id = "rg-aekzr7sprapjh4a"
 
+//VPC
+vpc_cidr = "192.168.0.0/16"
+
 // VSwitch
 ecs_vswitch_cidrs      = ["192.168.0.0/19", "192.168.64.0/19", "192.168.96.0/20"]
 rds_vswitch_cidrs      = ["192.168.112.0/21"]
