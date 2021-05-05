@@ -15,6 +15,7 @@ provider "alicloud" {
 }
 
 locals {
+  prefix = "XOM-${var.project_name}-${var.environment}"
   tags = {
     Environment = var.environment
     Application = "ECOMM-BCS"
@@ -23,7 +24,7 @@ locals {
 
 module "vpc" {
   source            = "../modules/vpc"
-  name              = "XOM-${var.project_name}-${var.environment}-VPC"
+  name              = "${local.prefix}-VPC001"
   resource_group_id = var.resource_group_id
   cidr              = var.vpc_cidr
   tags              = local.tags
@@ -38,7 +39,7 @@ module "vswitchs" {
   ecs_zone_ids       = var.ecs_vswitch_zone_ids
   rds_zone_ids       = var.rds_vswitch_zone_ids
   kafka_zone_ids     = var.kafka_vswitch_zone_ids
-  names_prefix       = "XOM-${var.project_name}-${var.environment}-SNT"
+  names_prefix       = "${local.prefix}-SNT"
   ecs_names_suffix   = "node"
   rds_names_suffix   = "database"
   kafka_names_suffix = "kafka"
@@ -48,11 +49,11 @@ module "vswitchs" {
 module "rds" {
   source            = "../modules/rds"
   resource_group_id = var.resource_group_id
-  instance_name     = "XOM-${var.project_name}-${var.environment}-RDS"
+  instance_name     = "${local.prefix}-RDS001"
   instance_type     = var.rds_instance_type
   instance_storage  = var.rds_instance_storage
   vswitch_id        = module.vswitchs.rds_vswitch_ids[0]
-  db_name_template  = "XOM-${var.project_name}-%s-DATABASE-%s"
+  db_name_template  = "XOM-${var.project_name}-%s-DATABASE%d-%s"
   db_names          = var.db_names
   db_envs           = var.db_envs
   tags              = local.tags
@@ -60,7 +61,7 @@ module "rds" {
 
 module "kafka" {
   source      = "../modules/kafka"
-  name        = "XOM-${var.project_name}-${var.environment}-MQ"
+  name        = "${local.prefix}-MQ001"
   topic_quota = var.kafka_topic_quota
   disk_size   = var.kafka_disk_size
   io_max      = var.kafka_io_max
@@ -71,9 +72,9 @@ module "kafka" {
 
 module "ack" {
   source               = "../modules/ack"
-  log_name             = "XOM-${var.project_name}-${var.environment}-SLS"
-  k8s_name             = "XOM-${var.project_name}-${var.environment}-K8S"
-  k8s_key_name         = "XOM-${var.project_name}-${var.environment}-K8S-WORKER-KEY"
+  log_name             = "${local.prefix}-SLS001"
+  k8s_name             = "${local.prefix}-K8S001"
+  k8s_key_name         = "${local.prefix}-K8S001-WORKER-KEY"
   resource_group_id    = var.resource_group_id
   cluster_spec         = var.k8s_cluster_spec
   ecs_vswitch_ids      = module.vswitchs.ecs_vswitch_ids
