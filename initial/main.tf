@@ -12,7 +12,7 @@ provider "alicloud" {
 }
 
 resource "alicloud_oss_bucket" "tf-state" {
-  bucket = lower("XOM-ECOMM-BCS-SHARED-OSS-TFSTATE")
+  bucket = lower("XOM-ECOMM-BCS-SHARED-OSS001-TFSTATE")
   acl    = "private"
 
   versioning {
