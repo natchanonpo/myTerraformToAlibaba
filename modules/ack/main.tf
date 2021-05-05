@@ -11,6 +11,11 @@ locals {
   }])
 }
 
+resource "alicloud_ecs_key_pair" "keypair" {
+  key_pair_name     = var.k8s_key_name
+  resource_group_id = var.resource_group_id
+}
+
 resource "alicloud_cs_managed_kubernetes" "k8s" {
   name                         = var.k8s_name
   resource_group_id            = var.resource_group_id
@@ -24,7 +29,7 @@ resource "alicloud_cs_managed_kubernetes" "k8s" {
   worker_disk_category         = "cloud_essd"
   worker_disk_size             = var.worker_disk_size
   image_id                     = "centos_7_9_x64_20G_alibase_20201228.vhd"
-  key_name                     = "XOM-BCS-${var.environment}-K8S-WORKER-KEY"
+  key_name                     = alicloud_ecs_key_pair.keypair.id
   pod_cidr                     = var.pod_cidr
   service_cidr                 = var.service_cidr
   install_cloud_monitor        = true
@@ -42,4 +47,9 @@ resource "alicloud_cs_managed_kubernetes" "k8s" {
     }
   }
   tags = var.tags
+}
+
+resource "alicloud_ecs_key_pair_attachment" "keypair_attachment" {
+  key_pair_name = alicloud_ecs_key_pair.keypair.id
+  instance_ids  = [alicloud_cs_managed_kubernetes.k8s.id]
 }
