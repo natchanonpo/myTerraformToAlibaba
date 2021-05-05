@@ -48,8 +48,3 @@ resource "alicloud_cs_managed_kubernetes" "k8s" {
   }
   tags = var.tags
 }
-
-resource "alicloud_ecs_key_pair_attachment" "keypair_attachment" {
-  key_pair_name = alicloud_ecs_key_pair.keypair.id
-  instance_ids  = [alicloud_cs_managed_kubernetes.k8s.id]
-}
