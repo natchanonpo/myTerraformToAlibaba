@@ -1,2 +1,2 @@
-bucket = "xom-bcs-shared-oss-tfstate"
+bucket = "xom-ecomm-bcs-shared-oss-tfstate"
 prefix = "nonprod/tfstate"
