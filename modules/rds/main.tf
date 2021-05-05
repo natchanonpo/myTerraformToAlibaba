@@ -1,5 +1,10 @@
 locals {
-  db_full_names = formatlist("%s", formatlist(var.db_name_template, var.db_envs, "%s"), var.db_names)
+  db_full_names = flattern([
+    for env in var.db_envs: [
+      for db_name in var.db_names:
+        format(var.db_name_template, env, db_name)
+    ]
+  ])
 }
 
 resource "alicloud_db_instance" "rds_instance" {
