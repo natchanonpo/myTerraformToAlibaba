@@ -18,7 +18,7 @@ locals {
   prefix = "XOM-${var.project_name}-${var.environment}"
   tags = {
     Environment = var.environment
-    Application = "ECOMM-BCS"
+    Application = var.project_name
   }
 }
 
