@@ -71,7 +71,7 @@ output "certificate_authority" {
 }
 
 //Output RDS resource
-output "instance_id" {
+output "rds_instance_id" {
   description = "The RDS instance ID."
   value       = module.rds.instance_id
 }
@@ -91,7 +91,7 @@ output "rds_ssl_status" {
   value       = module.rds.instance_ssl_status
 }
 
-output "database_id" {
+output "database_ids" {
   description = "The current database resource ID. Composed of instance ID and database name with format <instance_id>:<name>."
   value       = [module.rds.database_ids]
 }

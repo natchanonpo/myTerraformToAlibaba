@@ -1,12 +1,9 @@
-environment = "PRODUCTION"
+environment  = "PRODUCTION"
+project_name = "ECOMM-BCS"
 cluster_addons = [
   {
     "name"   = "nginx-ingress-controller",
     "config" = "{\"IngressSlbNetworkType\":\"internet\"}",
-  },
-  {
-    "name"   = "logtail-ds",
-    "config" = "{\"IngressDashboardEnabled\":\"true\",\"sls_project_name\":\"XOM-BCS-PRODUCTION-SLS\"}",
   },
   {
     "name"   = "csi-plugin",
