@@ -18,7 +18,7 @@ kafka_vswitch_zone_ids = ["cn-shanghai-a"]
 rds_instance_type    = "rds.mysql.s2.large"
 rds_instance_storage = 50
 db_names             = ["ORDER-TO-CASH", "USER", "CUSTOMER-SERVICE", "CRM", "PRODUCT"]
-db_envs              = ["DEV", "STI", "ACC"]
+db_envs              = ["DEV", "SIT", "ACC"]
 
 // Kafka
 kafka_disk_size   = 500
