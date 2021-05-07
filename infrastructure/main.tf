@@ -22,10 +22,15 @@ locals {
   }
 }
 
+module "resource_group" {
+  source = "../modules/resource-group"
+  name   = "${local.prefix}-RSG001"
+}
+
 module "vpc" {
   source            = "../modules/vpc"
   name              = "${local.prefix}-VPC001"
-  resource_group_id = var.resource_group_id
+  resource_group_id = module.resource_group.resource_group_id
   cidr              = var.vpc_cidr
   tags              = local.tags
 }
@@ -48,7 +53,7 @@ module "vswitchs" {
 
 module "rds" {
   source            = "../modules/rds"
-  resource_group_id = var.resource_group_id
+  resource_group_id = module.resource_group.resource_group_id
   instance_name     = "${local.prefix}-RDS001"
   instance_type     = var.rds_instance_type
   instance_storage  = var.rds_instance_storage
@@ -75,7 +80,7 @@ module "ack" {
   log_name             = "${local.prefix}-SLS001"
   k8s_name             = "${local.prefix}-K8S001"
   k8s_key_name         = "${local.prefix}-K8S001-WORKER-KEY"
-  resource_group_id    = var.resource_group_id
+  resource_group_id    = module.resource_group.resource_group_id
   cluster_spec         = var.k8s_cluster_spec
   ecs_vswitch_ids      = module.vswitchs.ecs_vswitch_ids
   rds_instance_id      = module.rds.instance_id
@@ -87,30 +92,3 @@ module "ack" {
   service_cidr         = var.k8s_service_cidr
   tags                 = local.tags
 }
-
-//grant cluster read-only permission for alibaba console role
-/*resource "alicloud_ram_policy" "cluster-read-only" {
-  policy_name     = "cluster-read-only"
-  policy_document = <<EOF
-  {
-    "Statement": [{
-      "Action": [
-         "cs:Get*"
-         ],
-      "Effect": "Allow",
-      "Resource": [
-         "acs:cs:*:*:cluster/${alicloud_cs_managed_kubernetes.k8s.id}"
-      ]
-    }],
-    "Version": "1"
-  }
-  EOF
-  description     = "read only policy for K8S"
-}
-
-resource "alicloud_ram_role_policy_attachment" "attach" {
-  policy_name = alicloud_ram_policy.cluster-read-only.name
-  policy_type = alicloud_ram_policy.cluster-read-only.type
-  role_name   = "flcit-chemicalchina-dev-xom-editor"
-}
-*/

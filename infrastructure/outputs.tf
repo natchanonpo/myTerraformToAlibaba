@@ -95,3 +95,9 @@ output "database_ids" {
   description = "The current database resource ID. Composed of instance ID and database name with format <instance_id>:<name>."
   value       = [module.rds.database_ids]
 }
+
+// Resource group
+output "resource_group_id" {
+  description = "The resource group ID."
+  value       = module.resource_group.resource_group_id
+}

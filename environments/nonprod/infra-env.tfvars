@@ -1,7 +1,6 @@
 // Shared
-environment       = "NONPROD"
-project_name      = "ECOMM-BCS"
-resource_group_id = "rg-aekzr7sprapjh4a"
+environment  = "NONPROD"
+project_name = "ECOMM-BCS"
 
 //VPC
 vpc_cidr = "192.168.0.0/16"
