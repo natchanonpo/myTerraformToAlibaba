@@ -2,7 +2,7 @@
 environment  = "NONPROD"
 project_name = "ECOMM-BCS"
 
-//VPC
+// VPC
 vpc_cidr = "192.168.0.0/16"
 
 // VSwitch
@@ -14,11 +14,11 @@ rds_vswitch_zone_ids   = ["cn-shanghai-a"]
 kafka_vswitch_zone_ids = ["cn-shanghai-a"]
 
 // RDS
-//In general for a production database, you’ll choose either High Availability or Enterprise, usually with ‘Local Disk”.
+// In general for a production database, you’ll choose either High Availability or Enterprise, usually with ‘Local Disk”.
 rds_instance_type    = "rds.mysql.s2.large"
 rds_instance_storage = 50
 db_names             = ["ORDER-TO-CASH", "USER", "CUSTOMER-SERVICE", "CRM", "PRODUCT"]
-db_envs              = ["DEV", "ACC"]
+db_envs              = ["DEV", "STI", "ACC"]
 
 // Kafka
 kafka_disk_size   = 500
