@@ -23,7 +23,7 @@ db_envs              = ["DEV", "SIT", "ACC"]
 // Kafka
 kafka_disk_size   = 500
 kafka_topic_quota = 50
-kafka_io_max      = 20
+kafka_io_max      = 5
 kafka_eip_max     = 1
 
 // ACK
