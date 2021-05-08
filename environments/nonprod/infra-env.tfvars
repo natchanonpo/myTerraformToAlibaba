@@ -6,9 +6,9 @@ project_name = "ECOMM-BCS"
 vpc_cidr = "192.168.0.0/16"
 
 // VSwitch
-ecs_vswitch_cidrs      = ["192.168.0.0/19", "192.168.64.0/19", "192.168.96.0/20"]
-rds_vswitch_cidrs      = ["192.168.112.0/21"]
-kafka_vswitch_cidrs    = ["192.168.151.0/24"]
+ecs_vswitch_cidrs      = ["192.168.0.0/19", "192.168.32.0/19", "192.168.64.0/19"]
+rds_vswitch_cidrs      = ["192.168.128.0/19"]
+kafka_vswitch_cidrs    = ["192.168.96.0/19"]
 ecs_vswitch_zone_ids   = ["cn-shanghai-b", "cn-shanghai-g", "cn-shanghai-l"]
 rds_vswitch_zone_ids   = ["cn-shanghai-a"]
 kafka_vswitch_zone_ids = ["cn-shanghai-a"]
