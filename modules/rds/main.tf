@@ -19,6 +19,7 @@ resource "alicloud_db_instance" "rds_instance" {
   instance_charge_type = "PrePaid"
   period            = 1
   auto_renew        = true
+  auto_renew_period = 1
 }
 
 resource "alicloud_db_database" "database" {

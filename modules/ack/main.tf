@@ -25,6 +25,11 @@ resource "alicloud_cs_managed_kubernetes" "k8s" {
   worker_vswitch_ids           = var.ecs_vswitch_ids
   new_nat_gateway              = true
   worker_instance_types        = [var.worker_instance_type]
+  worker_instance_charge_type  = "PrePaid"
+  worker_period                = 1
+  worker_period_unit           = "Month"
+  worker_auto_renew            = true
+  worker_auto_renew_period     = 1
   worker_number                = length(var.ecs_vswitch_ids)
   worker_disk_category         = "cloud_essd"
   worker_disk_size             = var.worker_disk_size
