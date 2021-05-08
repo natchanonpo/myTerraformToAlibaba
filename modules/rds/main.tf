@@ -16,6 +16,9 @@ resource "alicloud_db_instance" "rds_instance" {
   vswitch_id        = var.vswitch_id
   instance_name     = var.instance_name
   tags              = var.tags
+  instance_charge_type = "PrePaid"
+  period            = 1
+  auto_renew        = true
 }
 
 resource "alicloud_db_database" "database" {
