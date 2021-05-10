@@ -23,8 +23,9 @@ locals {
 }
 
 module "resource_group" {
+  //Deleting resource group take 7 days to be finish!!
   source = "../modules/resource-group"
-  name   = "${local.prefix}-RSG001"
+  name   = "${local.prefix}-RSG002"
 }
 
 module "vpc" {
