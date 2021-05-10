@@ -24,7 +24,7 @@ db_allowed_external_envs = ["DEV", "SIT"]
 // Kafka
 kafka_disk_size   = 500
 kafka_topic_quota = 50
-kafka_io_max      = 15
+kafka_io_max      = 20
 kafka_eip_max     = 1
 
 // ACK
