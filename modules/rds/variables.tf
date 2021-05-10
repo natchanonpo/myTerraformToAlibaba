@@ -33,3 +33,23 @@ variable "db_envs" {
 variable "db_name_template" {
   type = string
 }
+
+variable "allowed_external_db_envs" {
+  type = list(string)
+}
+
+variable "xom_editor_password" {
+  type = string
+}
+
+variable "xom_readonly_password" {
+  type = string
+}
+
+variable "external_editor_password" {
+  type = string
+}
+
+variable "external_readonly_password" {
+  type = string
+}

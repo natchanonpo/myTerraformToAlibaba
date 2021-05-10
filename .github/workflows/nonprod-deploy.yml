@@ -53,7 +53,13 @@ jobs:
     # Generates an execution plan for Terraform
     - name: Terraform Plan
       working-directory: ./infrastructure
-      run: terraform plan -input=false -out=tfplan -var-file=../environments/nonprod/infra-env.tfvars
+      run: |
+      terraform plan -input=false -out=tfplan \
+        -var-file=../environments/nonprod/infra-env.tfvars \
+        -var db_xom_editor_password='${{ secrets.DB_XOM_EDITOR_PASSWORD }}' \
+        -var db_xom_readonly_password='${{ secrets.DB_XOM_READONLY_PASSWORD }}' \
+        -var db_external_editor_password='${{ secrets.DB_EXTERNAL_EDITOR_PASSWORD }}' \
+        -var db_external_readonly_password='${{ secrets.DB_EXTERNAL_READONLY_PASSWORD }}' \
 
       # On push to main, build or change infrastructure according to Terraform configuration files
       # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks

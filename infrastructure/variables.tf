@@ -50,6 +50,26 @@ variable "db_envs" {
   type = list(string)
 }
 
+variable "allowed_external_db_envs" {
+  type = list(string)
+}
+
+variable "db_xom_editor_password" {
+  type = string
+}
+
+variable "db_xom_readonly_password" {
+  type = string
+}
+
+variable "db_external_editor_password" {
+  type = string
+}
+
+variable "db_external_readonly_password" {
+  type = string
+}
+
 variable "kafka_disk_size" {
   type = number
 }
