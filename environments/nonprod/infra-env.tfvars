@@ -19,7 +19,7 @@ rds_instance_type        = "rds.mysql.s2.large"
 rds_instance_storage     = 50
 db_names                 = ["ORDER-TO-CASH", "USER", "CUSTOMER-SERVICE", "CRM", "PRODUCT"]
 db_envs                  = ["DEV", "SIT", "ACC"]
-allowed_external_db_envs = ["DEV", "SIT"]
+db_allowed_external_envs = ["DEV", "SIT"]
 
 // Kafka
 kafka_disk_size   = 500

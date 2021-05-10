@@ -50,7 +50,7 @@ variable "db_envs" {
   type = list(string)
 }
 
-variable "allowed_external_db_envs" {
+variable "db_allowed_external_envs" {
   type = list(string)
 }
 
