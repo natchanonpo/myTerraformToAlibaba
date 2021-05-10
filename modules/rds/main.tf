@@ -2,13 +2,13 @@ locals {
   db_full_names = flatten([
     for env in var.db_envs : [
       for db_name in var.db_names :
-      format(var.db_name_template, env, index(var.db_names, db_name) + 1, db_name)
+      lower(format(var.db_name_template, env, index(var.db_names, db_name) + 1, db_name))
     ]
   ])
   db_external_full_names = flatten([
     for env in var.db_allowed_external_envs : [
       for db_name in var.db_names :
-      format(var.db_name_template, env, index(var.db_names, db_name) + 1, db_name)
+      lower(format(var.db_name_template, env, index(var.db_names, db_name) + 1, db_name))
     ]
   ])
 }
@@ -31,7 +31,7 @@ resource "alicloud_db_instance" "rds_instance" {
 resource "alicloud_db_database" "database" {
   count       = length(local.db_full_names)
   instance_id = alicloud_db_instance.rds_instance.id
-  name        = lower(element(local.db_full_names, count.index))
+  name        = element(local.db_full_names, count.index)
 }
 
 resource "alicloud_rds_account" "db_xom_editor_account" {
@@ -75,13 +75,13 @@ resource "alicloud_db_account_privilege" "db_xom_readonly_rights" {
 resource "alicloud_db_account_privilege" "db_external_editor_rights" {
   instance_id  = alicloud_db_instance.rds_instance.id
   account_name = alicloud_rds_account.db_external_editor_account.name
-  db_names     = matchkeys(alicloud_db_database.database.*.name, alicloud_db_database.database.*.name, lower(local.db_external_full_names))
+  db_names     = matchkeys(alicloud_db_database.database.*.name, alicloud_db_database.database.*.name, local.db_external_full_names)
   privilege    = "ReadWrite"
 }
 
 resource "alicloud_db_account_privilege" "db_external_readonly_rights" {
   instance_id  = alicloud_db_instance.rds_instance.id
   account_name = alicloud_rds_account.db_external_readonly_account.name
-  db_names     = matchkeys(alicloud_db_database.database.*.name, alicloud_db_database.database.*.name, lower(local.db_external_full_names))
+  db_names     = matchkeys(alicloud_db_database.database.*.name, alicloud_db_database.database.*.name, local.db_external_full_names)
   privilege    = "ReadOnly"
 }
