@@ -16,6 +16,10 @@ data "alicloud_ack_service" "open_ack" {
   type   = "propayasgo"
 }
 
+data "alicloud_log_service" "open_log" {
+  enable = "On"
+}
+
 resource "alicloud_ecs_key_pair" "keypair" {
   key_pair_name     = var.k8s_key_name
   resource_group_id = var.resource_group_id
