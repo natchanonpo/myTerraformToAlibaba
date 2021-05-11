@@ -17,9 +17,6 @@ resource "alicloud_ecs_key_pair" "keypair" {
 }
 
 resource "alicloud_cs_managed_kubernetes" "k8s" {
-  depends_on = [
-    alicloud_ack_service.open_ack
-  ]
   name                         = var.k8s_name
   resource_group_id            = var.resource_group_id
   version                      = "1.18.8-aliyun.1"
