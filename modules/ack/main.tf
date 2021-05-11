@@ -5,21 +5,9 @@ locals {
   }])
 }
 
-data "alicloud_log_service" "open_log" {
-  enable = "On"
-}
-
-data "alicloud_ack_service" "open_ack" {
-  enable = "On"
-  type   = "propayasgo"
-}
-
 resource "alicloud_log_project" "log" {
-  depends_on = [
-    alicloud_log_service.open_log
-  ]
   name        = lower(var.log_name)
-  description = "log for k8s"
+  description = "log for k8s."
   tags        = var.tags
 }
 

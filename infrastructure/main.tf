@@ -22,6 +22,10 @@ locals {
   }
 }
 
+module "services_enabling" {
+  source = "../modules/services-enabling"
+}
+
 module "resource_group" {
   //Deleting resource group take 7 days to be finish!!
   source = "../modules/resource-group"
@@ -82,6 +86,9 @@ module "kafka" {
 }
 
 module "ack" {
+  depends_on = [
+    module.services_enabling
+  ]
   source               = "../modules/ack"
   log_name             = "${local.prefix}-SLS001"
   k8s_name             = "${local.prefix}-K8S001"
