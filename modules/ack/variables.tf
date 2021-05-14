@@ -56,3 +56,7 @@ variable "cluster_addons" {
     config = string
   }))
 }
+
+variable "ops_role" {
+  type = string
+}

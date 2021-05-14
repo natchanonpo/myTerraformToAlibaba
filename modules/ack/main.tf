@@ -53,3 +53,14 @@ resource "alicloud_cs_managed_kubernetes" "k8s" {
   }
   tags = var.tags
 }
+
+resource "alicloud_cs_kubernetes_permissions_grant" "default" {
+  uid = var.ops_role
+  permissions {
+    cluster     = alicloud_cs_managed_kubernetes.k8s.id
+    role_type   = "cluster"
+    role_name   = "ops"
+    is_custom   = false
+    is_ram_role = true
+  }
+}

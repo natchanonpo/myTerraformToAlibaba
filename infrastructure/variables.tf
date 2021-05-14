@@ -116,3 +116,7 @@ variable "k8s_cluster_addons" {
     config = string
   }))
 }
+
+variable "k8s_ops_role" {
+  type = string
+}

@@ -104,4 +104,5 @@ module "ack" {
   pod_cidr             = var.k8s_pod_cidr
   service_cidr         = var.k8s_service_cidr
   tags                 = local.tags
+  ops_role             = var.k8s_ops_role
 }
