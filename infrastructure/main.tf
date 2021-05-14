@@ -2,7 +2,7 @@ terraform {
   required_providers {
     alicloud = {
       source  = "aliyun/alicloud"
-      version = "1.121.3"
+      version = "1.122.1"
     }
   }
   backend "oss" {
