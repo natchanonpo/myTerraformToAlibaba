@@ -54,7 +54,7 @@ resource "alicloud_cs_managed_kubernetes" "k8s" {
   tags = var.tags
 }
 
-resource "alicloud_cs_kubernetes_permissions_grant" "default" {
+resource "alicloud_cs_kubernetes_permissions" "default" {
   uid = var.ops_role
   permissions {
     cluster     = alicloud_cs_managed_kubernetes.k8s.id
