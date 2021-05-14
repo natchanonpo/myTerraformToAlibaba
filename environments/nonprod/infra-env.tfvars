@@ -56,4 +56,4 @@ k8s_cluster_addons = [
     "config" = "",
   }
 ]
-k8s_ops_role = "FLCIT-ChemicalChina-PRD-xom-readonly"
+k8s_ops_role = "322331245064461450"
