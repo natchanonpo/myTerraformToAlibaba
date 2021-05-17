@@ -94,21 +94,21 @@ module "ack" {
   depends_on = [
     module.services_enabling
   ]
-  source                  = "../modules/ack"
-  log_name                = "${local.prefix}-SLS001"
-  k8s_name                = "${local.prefix}-K8S001"
-  k8s_key_name            = "${local.prefix}-K8S001-WORKER-KEY"
-  resource_group_id       = module.resource_group.resource_group_id
-  cluster_spec            = var.k8s_cluster_spec
-  ecs_vswitch_ids         = module.vswitchs.ecs_vswitch_ids
-  rds_instance_id         = module.rds.instance_id
-  worker_instance_type    = var.k8s_worker_instance_type
-  load_balancer_spec      = var.k8s_load_balancer_spec
-  worker_disk_size        = var.k8s_worker_disk_size
-  cluster_addons          = var.k8s_cluster_addons
-  pod_cidr                = var.k8s_pod_cidr
-  service_cidr            = var.k8s_service_cidr
-  encryption_provider_key = module.kms.kms_k8s_key_id
-  ops_role                = var.k8s_ops_role
-  tags                    = local.tags
+  source               = "../modules/ack"
+  log_name             = "${local.prefix}-SLS001"
+  k8s_name             = "${local.prefix}-K8S001"
+  k8s_key_name         = "${local.prefix}-K8S001-WORKER-KEY"
+  resource_group_id    = module.resource_group.resource_group_id
+  cluster_spec         = var.k8s_cluster_spec
+  ecs_vswitch_ids      = module.vswitchs.ecs_vswitch_ids
+  rds_instance_id      = module.rds.instance_id
+  worker_instance_type = var.k8s_worker_instance_type
+  load_balancer_spec   = var.k8s_load_balancer_spec
+  worker_disk_size     = var.k8s_worker_disk_size
+  cluster_addons       = var.k8s_cluster_addons
+  pod_cidr             = var.k8s_pod_cidr
+  service_cidr         = var.k8s_service_cidr
+  ops_role             = var.k8s_ops_role
+  tags                 = local.tags
+  //encryption_provider_key = module.kms.kms_k8s_key_id
 }
