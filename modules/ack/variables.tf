@@ -60,3 +60,7 @@ variable "cluster_addons" {
 variable "ops_role" {
   type = string
 }
+
+variable "encryption_provider_key" {
+  type = string
+}
