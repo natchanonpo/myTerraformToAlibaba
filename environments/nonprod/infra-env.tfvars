@@ -57,7 +57,7 @@ k8s_cluster_addons = [
   },
   {
     "name"   = "ack-secret-manager",
-    "config" = "",
+    "config" = "{\"IngressDashboardEnabled\":\"true\", \"sls_project_name\":\"xom-ecomm-bcs-nonprod-sls001\"}",
   }
 ]
 k8s_ops_role = "322331245064461450"
