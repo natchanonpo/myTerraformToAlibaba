@@ -40,7 +40,7 @@ resource "alicloud_cs_managed_kubernetes" "k8s" {
   install_cloud_monitor        = true
   is_enterprise_security_group = true
   load_balancer_spec           = var.load_balancer_spec
-  //encryption_provider_key      = var.encryption_provider_key
+  encryption_provider_key      = var.encryption_provider_key
   runtime = {
     name    = "docker"
     version = "19.03.5"
