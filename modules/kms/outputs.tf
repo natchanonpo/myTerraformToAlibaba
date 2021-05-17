@@ -1,5 +1,5 @@
 output "kms_k8s_key_id" {
-  value = alicloud_kms_key.k8s_kms.id
+  value = alicloud_kms_key.kms_k8s_key.id
 }
 
 output "kms_k8s_key_alias" {
