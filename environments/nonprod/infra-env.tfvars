@@ -54,6 +54,10 @@ k8s_cluster_addons = [
   {
     "name"   = "arms-prometheus",
     "config" = "",
+  },
+  {
+    "name"   = "ack-secret-manager",
+    "config" = "",
   }
 ]
 k8s_ops_role = "322331245064461450"
