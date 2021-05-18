@@ -16,7 +16,7 @@ data "alicloud_oss_service" "open" {
 }
 
 resource "alicloud_oss_bucket" "tf-state" {
-  bucket = lower("XOM-ECOMM-BCS-SHARED-OSS001-TFSTATE")
+  bucket = lower("test-xom-ecomm-bcs-shared-oss001-tfstate")
   acl    = "private"
 
   versioning {
