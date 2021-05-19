@@ -62,17 +62,17 @@ locals {
 # }
 
 module "rdsDEV" {
-  source                     = "../modules/rds"
-  resource_group_id          = module.resource_group.resource_group_id
-  instance_name              = "${local.prefix}-RDS001"
-  instance_type              = var.rds_instance_type
-  instance_storage           = var.rds_instance_storage
+  source            = "../modules/rds"
+  resource_group_id = module.resource_group.resource_group_id
+  instance_name     = "${local.prefix}-RDS001"
+  instance_type     = var.rds_instance_type
+  instance_storage  = var.rds_instance_storage
   # vswitch_id                 = module.vswitchs.rds_vswitch_ids[0]
-  db_name_template           = "XOM-${var.project_name}-%s-DATABASE%03s-%s"
-  db_names                   = var.db_names
+  db_name_template = "XOM-${var.project_name}-%s-DATABASE%03s-%s"
+  db_names         = var.db_names
   # db_envs                    = var.db_envs
-  db_envs                    = var.rds_model[0].db_envs
-  db_allowed_external_envs   = var.db_allowed_external_envs
+  db_envs                  = var.rds_model[0].db_envs
+  db_allowed_external_envs = var.db_allowed_external_envs
   # xom_editor_password        = var.db_xom_editor_password
   # xom_readonly_password      = var.db_xom_readonly_password
   external_editor_password   = var.db_external_editor_password
@@ -82,17 +82,17 @@ module "rdsDEV" {
 }
 
 module "rdsACC" {
-  source                     = "../modules/rds"
-  resource_group_id          = module.resource_group.resource_group_id
-  instance_name              = "${local.prefix}-RDS002"
-  instance_type              = var.rds_instance_type
-  instance_storage           = var.rds_instance_storage
+  source            = "../modules/rds"
+  resource_group_id = module.resource_group.resource_group_id
+  instance_name     = "${local.prefix}-RDS002"
+  instance_type     = var.rds_instance_type
+  instance_storage  = var.rds_instance_storage
   # vswitch_id                 = module.vswitchs.rds_vswitch_ids[0]
-  db_name_template           = "XOM-${var.project_name}-%s-DATABASE%03s-%s"
-  db_names                   = var.db_names
+  db_name_template = "XOM-${var.project_name}-%s-DATABASE%03s-%s"
+  db_names         = var.db_names
   # db_envs                    = var.db_envs
-  db_envs                    = var.rds_model[0].db_envs
-  db_allowed_external_envs   = var.db_allowed_external_envs
+  db_envs                  = var.rds_model[0].db_envs
+  db_allowed_external_envs = var.db_allowed_external_envs
   # xom_editor_password        = var.db_xom_editor_password
   # xom_readonly_password      = var.db_xom_readonly_password
   external_editor_password   = var.db_external_editor_password
