@@ -73,8 +73,8 @@ module "rdsDEV" {
   # db_envs                    = var.db_envs
   db_envs                    = var.rds_model[0].db_envs
   db_allowed_external_envs   = var.db_allowed_external_envs
-  xom_editor_password        = var.db_xom_editor_password
-  xom_readonly_password      = var.db_xom_readonly_password
+  # xom_editor_password        = var.db_xom_editor_password
+  # xom_readonly_password      = var.db_xom_readonly_password
   external_editor_password   = var.db_external_editor_password
   external_readonly_password = var.db_external_readonly_password
   tags                       = local.tags
@@ -93,8 +93,8 @@ module "rdsACC" {
   # db_envs                    = var.db_envs
   db_envs                    = var.rds_model[0].db_envs
   db_allowed_external_envs   = var.db_allowed_external_envs
-  xom_editor_password        = var.db_xom_editor_password
-  xom_readonly_password      = var.db_xom_readonly_password
+  # xom_editor_password        = var.db_xom_editor_password
+  # xom_readonly_password      = var.db_xom_readonly_password
   external_editor_password   = var.db_external_editor_password
   external_readonly_password = var.db_external_readonly_password
   tags                       = local.tags
