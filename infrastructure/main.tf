@@ -78,7 +78,6 @@ module "rdsDEV" {
   external_editor_password   = var.db_external_editor_password
   external_readonly_password = var.db_external_readonly_password
   tags                       = local.tags
-  rds_model                  = var.rds_model
 }
 
 module "rdsACC" {
@@ -98,7 +97,6 @@ module "rdsACC" {
   external_editor_password   = var.db_external_editor_password
   external_readonly_password = var.db_external_readonly_password
   tags                       = local.tags
-  rds_model                  = var.rds_model
 }
 
 # module "kafka" {
