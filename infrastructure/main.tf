@@ -62,11 +62,11 @@ locals {
 # }
 
 module "rds_dev_sit" {
-  source            = "../modules/rds"
-  resource_group_id = module.resource_group.resource_group_id
-  instance_name     = "${local.prefix}-RDS001"
-  instance_type     = var.rds_instance_type
-  instance_storage  = var.rds_instance_storage
+  source = "../modules/rds"
+  # resource_group_id = module.resource_group.resource_group_id
+  instance_name    = "${local.prefix}-RDS001"
+  instance_type    = var.rds_instance_type
+  instance_storage = var.rds_instance_storage
   # vswitch_id                 = module.vswitchs.rds_vswitch_ids[0]
   db_name_template = "XOM-${var.project_name}-%s-DATABASE%03s-%s"
   db_names         = var.db_names
@@ -81,11 +81,11 @@ module "rds_dev_sit" {
 }
 
 module "rds_acc" {
-  source            = "../modules/rds"
-  resource_group_id = module.resource_group.resource_group_id
-  instance_name     = "${local.prefix}-RDS002"
-  instance_type     = var.rds_instance_type
-  instance_storage  = var.rds_instance_storage
+  source = "../modules/rds"
+  # resource_group_id = module.resource_group.resource_group_id
+  instance_name    = "${local.prefix}-RDS002"
+  instance_type    = var.rds_instance_type
+  instance_storage = var.rds_instance_storage
   # vswitch_id                 = module.vswitchs.rds_vswitch_ids[0]
   db_name_template = "XOM-${var.project_name}-%s-DATABASE%03s-%s"
   db_names         = var.db_names

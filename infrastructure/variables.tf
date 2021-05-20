@@ -120,3 +120,7 @@ variable "k8s_cluster_addons" {
 variable "k8s_ops_role" {
   type = string
 }
+
+variable "rds_model" {
+  type = list(string)
+}
