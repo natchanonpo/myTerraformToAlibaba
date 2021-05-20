@@ -46,9 +46,9 @@ variable "db_names" {
   type = list(string)
 }
 
-variable "db_envs" {
-  type = list(string)
-}
+# variable "db_envs" {
+#   type = list(string)
+# }
 
 variable "db_allowed_external_envs" {
   type = list(string)
