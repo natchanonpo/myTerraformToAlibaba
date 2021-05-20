@@ -122,9 +122,9 @@ variable "k8s_ops_role" {
 }
 
 variable "db_envs_dev_sit" {
-  type = string
+  type = list(string)
 }
 
-variable "rds_acc" {
-  type = string
+variable "db_envs_acc" {
+  type = list(string)
 }
