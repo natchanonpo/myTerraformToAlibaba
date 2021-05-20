@@ -19,7 +19,7 @@ resource "alicloud_db_instance" "rds_instance" {
   engine_version       = "8.0"
   instance_type        = var.instance_type
   instance_storage     = var.instance_storage
-  vswitch_id           = var.vswitch_id
+  # vswitch_id           = var.vswitch_id
   instance_name        = var.instance_name
   tags                 = var.tags
   instance_charge_type = "Prepaid"
