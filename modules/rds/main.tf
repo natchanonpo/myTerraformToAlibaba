@@ -15,10 +15,10 @@ locals {
 
 resource "alicloud_db_instance" "rds_instance" {
   # resource_group_id    = var.resource_group_id
-  engine               = "MySQL"
-  engine_version       = "8.0"
-  instance_type        = var.instance_type
-  instance_storage     = var.instance_storage
+  engine           = "MySQL"
+  engine_version   = "8.0"
+  instance_type    = var.instance_type
+  instance_storage = var.instance_storage
   # vswitch_id           = var.vswitch_id
   instance_name        = var.instance_name
   tags                 = var.tags
