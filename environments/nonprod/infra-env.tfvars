@@ -24,10 +24,10 @@ db_names             = ["ORDER-TO-CASH", "USER", "CUSTOMER-SERVICE", "CRM", "PRO
 db_allowed_external_envs = ["DEV", "SIT"]
 rds_model = [
   {
-    db_envs = ["DEV", "SIT"],
+    "db_envs" = ["DEV", "SIT"],
   },
   {
-    db_envs = ["ACC"]
+    "db_envs" = ["ACC"]
   }
 ]
 /*
