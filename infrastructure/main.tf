@@ -61,7 +61,7 @@ locals {
 #   tags               = local.tags
 # }
 
-module "rdsDEV" {
+module "rds_dev_sit" {
   source            = "../modules/rds"
   resource_group_id = module.resource_group.resource_group_id
   instance_name     = "${local.prefix}-RDS001"
@@ -75,12 +75,12 @@ module "rdsDEV" {
   db_allowed_external_envs = var.db_allowed_external_envs
   # xom_editor_password        = var.db_xom_editor_password
   # xom_readonly_password      = var.db_xom_readonly_password
-  external_editor_password   = var.db_external_editor_password
-  external_readonly_password = var.db_external_readonly_password
-  tags                       = local.tags
+  # external_editor_password   = var.db_external_editor_password
+  # external_readonly_password = var.db_external_readonly_password
+  tags = local.tags
 }
 
-module "rdsACC" {
+module "rds_acc" {
   source            = "../modules/rds"
   resource_group_id = module.resource_group.resource_group_id
   instance_name     = "${local.prefix}-RDS002"
@@ -93,10 +93,10 @@ module "rdsACC" {
   db_envs                  = var.rds_model[0].db_envs
   db_allowed_external_envs = var.db_allowed_external_envs
   # xom_editor_password        = var.db_xom_editor_password
-  # xom_readonly_password      = var.db_xom_readonly_password
-  external_editor_password   = var.db_external_editor_password
-  external_readonly_password = var.db_external_readonly_password
-  tags                       = local.tags
+  # # xom_readonly_password      = var.db_xom_readonly_password
+  # external_editor_password   = var.db_external_editor_password
+  # external_readonly_password = var.db_external_readonly_password
+  tags = local.tags
 }
 
 # module "kafka" {
