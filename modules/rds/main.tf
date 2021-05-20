@@ -73,13 +73,14 @@ resource "alicloud_db_account_privilege" "db_xom_readonly_rights" {
 }
 
 resource "alicloud_db_account_privilege" "db_external_editor_rights" {
-  instance_id  = alicloud_db_instance.rds_instance.id
+  count        = length(local.db_external_full_names)
   account_name = alicloud_rds_account.db_external_editor_account.name
   db_names     = matchkeys(alicloud_db_database.database.*.name, alicloud_db_database.database.*.name, local.db_external_full_names)
   privilege    = "ReadWrite"
 }
 
 resource "alicloud_db_account_privilege" "db_external_readonly_rights" {
+  count        = length(local.db_external_full_names)
   instance_id  = alicloud_db_instance.rds_instance.id
   account_name = alicloud_rds_account.db_external_readonly_account.name
   db_names     = matchkeys(alicloud_db_database.database.*.name, alicloud_db_database.database.*.name, local.db_external_full_names)
