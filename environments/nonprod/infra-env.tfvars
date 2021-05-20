@@ -17,19 +17,13 @@ kafka_vswitch_zone_ids = ["cn-shanghai-a"]
 
 // RDS
 // In general for a production database, you’ll choose either High Availability or Enterprise, usually with ‘Local Disk”.
-rds_instance_type    = "rds.mysql.s2.large"
-rds_instance_storage = 50
-db_names             = ["ORDER-TO-CASH", "USER", "CUSTOMER-SERVICE", "CRM", "PRODUCT"]
-//db_envs                  = ["DEV", "SIT", "ACC"]
+rds_instance_type        = "rds.mysql.s2.large"
+rds_instance_storage     = 50
+db_names                 = ["ORDER-TO-CASH", "USER", "CUSTOMER-SERVICE", "CRM", "PRODUCT"]
+db_envs_dev_sit          = ["DEV", "SIT"]
+db_envs_acc              = ["ACC"]
 db_allowed_external_envs = ["DEV", "SIT"]
-rds_model = [
-  {
-    "db_envs" = ["DEV", "SIT"],
-  },
-  {
-    "db_envs" = ["ACC"]
-  }
-]
+
 /*
 // Kafka
 kafka_disk_size   = 500

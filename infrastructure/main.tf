@@ -71,7 +71,7 @@ module "rds_dev_sit" {
   db_name_template = "XOM-${var.project_name}-%s-DATABASE%03s-%s"
   db_names         = var.db_names
   # db_envs                    = var.db_envs
-  db_envs                  = var.rds_model[0].db_envs
+  db_envs                  = var.db_envs_dev_sit
   db_allowed_external_envs = var.db_allowed_external_envs
   # xom_editor_password        = var.db_xom_editor_password
   # xom_readonly_password      = var.db_xom_readonly_password
@@ -90,7 +90,7 @@ module "rds_acc" {
   db_name_template = "XOM-${var.project_name}-%s-DATABASE%03s-%s"
   db_names         = var.db_names
   # db_envs                    = var.db_envs
-  db_envs                  = var.rds_model[1].db_envs
+  db_envs                  = var.db_envs_acc
   db_allowed_external_envs = var.db_allowed_external_envs
   # xom_editor_password        = var.db_xom_editor_password
   # # xom_readonly_password      = var.db_xom_readonly_password
