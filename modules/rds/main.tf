@@ -35,27 +35,27 @@ resource "alicloud_db_database" "database" {
 }
 
 resource "alicloud_rds_account" "db_xom_editor_account" {
-  db_instance_id   = alicloud_db_instance.rds_instance.id
-  account_name     = "xom_editor"
-  account_password = var.xom_editor_password
+  db_instance_id = alicloud_db_instance.rds_instance.id
+  account_name   = "xom_editor"
+  # account_password = var.xom_editor_password
 }
 
 resource "alicloud_rds_account" "db_xom_readonly_account" {
-  db_instance_id   = alicloud_db_instance.rds_instance.id
-  account_name     = "xom_readonly"
-  account_password = var.xom_readonly_password
+  db_instance_id = alicloud_db_instance.rds_instance.id
+  account_name   = "xom_readonly"
+  # account_password = var.xom_readonly_password
 }
 
 resource "alicloud_rds_account" "db_external_editor_account" {
-  db_instance_id   = alicloud_db_instance.rds_instance.id
-  account_name     = "external_editor"
-  account_password = var.external_editor_password
+  db_instance_id = alicloud_db_instance.rds_instance.id
+  account_name   = "external_editor"
+  # account_password = var.external_editor_password
 }
 
 resource "alicloud_rds_account" "db_external_readonly_account" {
-  db_instance_id   = alicloud_db_instance.rds_instance.id
-  account_name     = "external_readonly"
-  account_password = var.external_readonly_password
+  db_instance_id = alicloud_db_instance.rds_instance.id
+  account_name   = "external_readonly"
+  # account_password = var.external_readonly_password
 }
 
 resource "alicloud_db_account_privilege" "db_xom_editor_rights" {
