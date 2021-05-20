@@ -2,9 +2,9 @@ variable "tags" {
   type = map(any)
 }
 
-variable "resource_group_id" {
-  type = string
-}
+# variable "resource_group_id" {
+#   type = string
+# }
 
 variable "instance_name" {
   type = string
