@@ -91,7 +91,7 @@ module "rds_acc" {
   db_names         = var.db_names
   # db_envs                    = var.db_envs
   db_envs                  = var.db_envs_acc
-  db_allowed_external_envs = var.db_allowed_external_envs
+  db_allowed_external_envs = "[]"
   # xom_editor_password        = var.db_xom_editor_password
   # # xom_readonly_password      = var.db_xom_readonly_password
   # external_editor_password   = var.db_external_editor_password
